@@ -18,11 +18,11 @@
 
     - name: Adicionar hosts coletados
       ansible.controller.host:
-        name: "{{ item.1.name }}"
+        name: "{{ host.name }}"
         inventory: INV-ALL-HOSTS
         enabled: True
         variables:
-          ansible_host: OK
-      loop: "{{ lookup('subelements', student_hosts, 'value') }}"
+          ansible_host: "{{ host.ip }}"
+      loop: "{{ student_hosts | subelements('hosts') }}"
 
    

@@ -2,13 +2,15 @@ student_hosts:
   - node1.example.com 3.143.241.229
 
 student_hosts:
-  student1:
-    - name: node1.example.com
-      ip: 3.143.241.229
-    - name: node2.example.com
-      ip: 3.14.145.117
-  student2:
-    - name: node1.example.com
-      ip: 3.143.241.202
-    - name: node2.example.com
-      ip: 3.14.145.118
+  - student: student1
+    hosts:
+      - name: node1.example.com
+        ip: 3.143.241.229
+      - name: node2.example.com
+        ip: 3.14.145.117
+  - student: student2
+    hosts:
+      - name: node1.example.com
+        ip: 3.143.241.202
+      - name: node2.example.com
+        ip: 3.14.145.118
