@@ -37,3 +37,12 @@
         ansible_host: "{{ item.1.ip }}"
     loop: "{{ student_hosts | subelements('hosts') }}"
 
+  - name: Criar grupos de estudantes e adicionar hosts
+    ansible.controller.group:
+      name: "{{ student }}"
+      inventory: INV-ALL-HOSTS
+      preserve_existing_hosts: True
+      hosts: "{{ groups[student] }}"
+    loop: "{{ student_hosts }}"
+    vars:
+      groups: "{{ student_hosts | items2dict(key_name='student', value_name='hosts') }}"
