@@ -35,5 +35,5 @@
       enabled: True
       variables:
         ansible_host: "{{ item.1.ip }}"
-     loop: "{{ student_hosts | subelements('hosts') }}"
+    loop: "{{ student_hosts | subelements('hosts') }}"
 
