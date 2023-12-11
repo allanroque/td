@@ -39,10 +39,8 @@
 
   - name: Criar grupos de estudantes e adicionar hosts
     ansible.controller.group:
-      name: "{{ student }}"
+      name: "{{ item.student }}"
       inventory: INV-ALL-HOSTS
       preserve_existing_hosts: True
-      hosts: "{{ groups[student] }}"
+      hosts: "{{ item.hosts | map(attribute='name') | map('regex_replace', '^(.*)$', item.student ~ '-\\1') | list }}"
     loop: "{{ student_hosts }}"
-    vars:
-      groups: "{{ student_hosts | items2dict(key_name='student', value_name='hosts') }}"
