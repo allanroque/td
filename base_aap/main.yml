@@ -42,5 +42,14 @@
       name: "{{ item.student }}"
       inventory: INV-ALL-HOSTS
       preserve_existing_hosts: True
-      hosts: "{{ item.hosts | map(attribute='name') | map('regex_replace', '^(.*)$', item.student ~ '-\\1') | list }}"
     loop: "{{ student_hosts }}"
+    register: group_creation
+
+  - name: Adicionar hosts a seus respectivos grupos
+    ansible.controller.group:
+      name: "{{ item.0.student }}"
+      inventory: INV-ALL-HOSTS
+      hosts: "{{ item.1.name }}"
+      append: yes
+    loop: "{{ student_hosts | subelements('hosts') }}"
+    when: item.0.student in group_creation.results | map(attribute='item.student') | list
