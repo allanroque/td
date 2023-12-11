@@ -49,5 +49,6 @@
     ansible.controller.group:
       name: "{{ item.0.student }}"
       inventory: INV-ALL-HOSTS
+      preserve_existing_hosts: True
       hosts: "{{ item.0.student }}-{{ item.1.name }}"
     loop: "{{ student_hosts | subelements('hosts') }}"
