@@ -1,0 +1,25 @@
+Criar
+Criar Credencial do Automation Controller
+Path: Resources > Credential > Add
+Nome: CRED-AC-CONFIG
+Descrição: Credencial de configuração do Automation Controller
+Organização: SECURITY ou Defaults
+Tipo de Credencial: Red Hat Ansible Automation Platform
+Hostname/IP: [Endereço do Automation Controller]
+Username: admin
+Password: [Senha]
+
+Criar Credencial do Git Interno
+Path: Resources > Credential > Add
+Nome: CRED-GIT-INTERNAL ou CRED-GIT-TEST
+Descrição: Credenciais de acesso ao Git interno
+Organização: SECURITY ou Defaults
+Tipo de Credencial: Source Control
+Username e Password: [Detalhes de acesso]
+
+
+CRED-AC-CONFIG
+CRED-SSH-HOSTS
+CRED-SSH-HOSTS
+PROJ-GIT-TESTDRIVE
+
