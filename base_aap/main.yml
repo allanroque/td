@@ -45,11 +45,9 @@
     loop: "{{ student_hosts }}"
     register: group_creation
 
-  - name: Adicionar hosts a seus respectivos grupos
+  - name: Adicionar hosts aos grupos de estudantes
     ansible.controller.group:
       name: "{{ item.0.student }}"
       inventory: INV-ALL-HOSTS
-      hosts: "{{ item.1.name }}"
-      append: yes
+      hosts: "{{ item.0.student }}-{{ item.1.name }}"
     loop: "{{ student_hosts | subelements('hosts') }}"
-    when: item.0.student in group_creation.results | map(attribute='item.student') | list
