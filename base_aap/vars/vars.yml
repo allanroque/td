@@ -1,7 +1,4 @@
 student_hosts:
-  - node1.example.com 3.143.241.229
-
-student_hosts:
   - student: student1
     hosts:
       - name: node1.example.com
