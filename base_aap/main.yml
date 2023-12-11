@@ -1,0 +1,28 @@
+---
+- name: Configuracao base o ambiente de Test Drive
+  hosts: localhost
+  vars_files:
+    - vars/vars.yml
+  gather_facts: False
+  tasks:
+
+#####################
+#### Base do AAP ####
+#####################
+    - name: Criar inventory INV-ALL-HOSTS
+      ansible.controller.inventory:
+        name: INV-ALL-HOSTS
+        description: "Inventario com hosts dos student"
+        organization: Default
+        state: present
+
+    - name: Adicionar hosts coletados
+      ansible.controller.host:
+        name: "{{ item.1.name }}"
+        inventory: INV-ALL-HOSTS
+        enabled: True
+        variables:
+          ansible_host: OK
+      loop: "{{ lookup('subelements', student_hosts, 'value') }}"
+
+   
