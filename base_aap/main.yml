@@ -9,20 +9,20 @@
 #####################
 #### Base do AAP ####
 #####################
-    - name: Criar inventory INV-ALL-HOSTS
-      ansible.controller.inventory:
-        name: INV-ALL-HOSTS
-        description: "Inventario com hosts dos student"
-        organization: Default
-        state: present
+  - name: Criar inventory INV-ALL-HOSTS
+    ansible.controller.inventory:
+      name: INV-ALL-HOSTS
+      description: "Inventario com hosts dos student"
+      organization: Default
+      state: present
 
-    - name: Adicionar hosts coletados
-      ansible.controller.host:
-        name: "{{ host.name }}"
-        inventory: INV-ALL-HOSTS
-        enabled: True
-        variables:
-          ansible_host: "{{ host.ip }}"
-      loop: "{{ student_hosts | subelements('hosts') }}"
-
-   
+  - name: Adicionar hosts coletados
+    ansible.controller.host:
+      name: "{{ item.1.name }}"
+      inventory: INV-ALL-HOSTS
+      enabled: True
+      variables:
+        ansible_host: "{{ item.1.ip }}"
+    loop: "{{ student_hosts | subelements('hosts') }}"
+    loop_control:
+      label: "{{ item.1.name }}"
